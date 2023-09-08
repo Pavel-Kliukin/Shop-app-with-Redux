@@ -1,6 +1,6 @@
 import { Container } from "react-bootstrap";
 import { useAppSelector } from "../app/hooks";
-import Product from "./Product";
+import CartProduct from "./CartProduct";
 
 const Cart = () => {
 
@@ -11,7 +11,7 @@ const Cart = () => {
       <h1>Cart will be here</h1>
       {cartItems.length === 0 && <p>Your cart is empty</p>}
       {cartItems.map((item) => (
-        <Product {...item} />
+        <CartProduct {...item} />
       ))}
     </Container>
   );
