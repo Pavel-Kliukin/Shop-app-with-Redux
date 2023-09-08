@@ -10,8 +10,8 @@ const List = () => {
   const dispatch = useAppDispatch()
 
   useEffect(()=> {
-    dispatch(fetchProducts())
-  }, [dispatch])
+    if(products.length < 1) dispatch(fetchProducts()) // we need "if" statement to not fetch products from fake-api-store everytime we go between the pages
+  }, [dispatch, products])
 
   return (
     <div>
