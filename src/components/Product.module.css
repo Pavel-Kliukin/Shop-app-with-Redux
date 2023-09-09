@@ -1,3 +1,36 @@
 .productCard {
   box-shadow: 5px 5px 10px;
 }
+
+.cardFooter {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.addRemoveBox {
+  background-color: rgb(242, 241, 241);
+  margin-left: 0.5rem;
+  min-width: 60px;
+  border: solid 1px;
+  border-radius: 5px;
+  border-color: rgb(199, 201, 203);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quantity {
+  width: 20px;
+  border-left: solid 1px;
+  border-right: solid 1px;
+  border-color: rgb(199, 201, 203);
+}
+
+.plusMinus {
+  width: 20px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

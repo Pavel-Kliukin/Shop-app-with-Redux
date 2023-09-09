@@ -1,19 +1,19 @@
 import { Button } from "react-bootstrap";
-import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { useAppDispatch} from "../app/hooks";
 import { addToCart, removeItemFromCart } from "../features/cartSlice"
+import { increaseQuantity, decreaseQuantity } from "../features/productsSlice"
 import { useLocation } from "react-router-dom";
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import classes from "./Product.module.css";
 
 const Product = (props) => {
-  const {image, title, price, rating, description, category, id} = props
+  const {image, title, price, rating, description, category, id, quantity} = props
   const product = props
   const cartItems = props.cartItems
   const dispatch = useAppDispatch()
   const location = useLocation()
 
-  let quantity = 0
   // cartItems.map((item) => {
   //   if(item.id === id) {
   //     return item.quantity
@@ -21,11 +21,13 @@ const Product = (props) => {
   // })
 
   const handleAddProduct = () => {
-    console.log("Products: ", product);
-    dispatch(addToCart(product)) //adds a product to a Cart via cartSlice
+
+    dispatch(increaseQuantity({ id: product.id })); // adds 1 to a quantity of a product with given id via productsSlice.js
+    dispatch(addToCart(product)) //adds a product to a Cart via cartSlice.js
   }
   const handleRemoveProduct = () => {
-    console.log("Products: ", product);
+    
+    dispatch(decreaseQuantity({ id: product.id })); // reduces 1 from a quantity of a product with given id via productsSlice.js
     dispatch(removeItemFromCart(product)) //adds a product to a Cart via cartSlice
   }
 
@@ -43,11 +45,19 @@ const Product = (props) => {
       <ListGroup.Item>{category}</ListGroup.Item>
       <ListGroup.Item>Rating: {rating.rate} <font color="grey">({rating.count} votes)</ font></ListGroup.Item>
       <ListGroup.Item>ID: {id}</ListGroup.Item>
-      <ListGroup.Item>Quantity: {quantity}</ListGroup.Item>
+      {/* <ListGroup.Item>Quantity: {quantity}</ListGroup.Item> */}
     </ListGroup>
-    <Button variant="primary" onClick={handleAddProduct}>Add to Cart</Button>
+    <Card.Footer className={classes.cardFooter}>
+      <small className="text-muted">Add to Cart:</small>
+      <div className={classes.addRemoveBox}>
+        <button className={`${classes.plusMinus} text-muted`} onClick={handleRemoveProduct}>-</button>
+        <div className={`${classes.quantity} text-muted`}>{quantity}</div>
+        <button className={`${classes.plusMinus} text-muted`} onClick={handleAddProduct}>+</button>
+      </div>
+    </Card.Footer>
+    {/* <Button variant="primary" onClick={handleAddProduct}>Add to Cart</Button>
     {location.pathname === "/cart" && <Button variant="danger" onClick={handleRemoveProduct}>Remove from Cart</Button>}
-    {(cartItems.length > 0 && cartItems.find(item => item.id === product.id)) && <Button variant="danger" onClick={handleRemoveProduct}>Remove from Cart</Button>}
+    {(cartItems.length > 0 && cartItems.find(item => item.id === product.id)) && <Button variant="danger" onClick={handleRemoveProduct}>Remove from Cart</Button>} */}
     </Card>
   );
 };

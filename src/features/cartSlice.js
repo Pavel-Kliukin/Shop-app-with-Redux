@@ -8,15 +8,13 @@ export const cartSlice = createSlice ({
   reducers: {
     addToCart(state, action) {
         if (state.length === 0) {
-          state.push({ ...action.payload, quantity: 1 })
+          state.push({ ...action.payload })
         } else {
           const index = state.findIndex(
             (product) => product.title === action.payload.title
           )
           if (index === -1) {
-            state.push({ ...action.payload, quantity: 1 })
-          } else {
-            state[index].quantity++
+            state.push({ ...action.payload })
           }
         }
       },
@@ -27,8 +25,6 @@ export const cartSlice = createSlice ({
           if (index !== -1) {
             if (state[index].quantity === 1) {
               state.splice(index, 1);
-            } else {
-              state[index].quantity--;
             }
           }
     }

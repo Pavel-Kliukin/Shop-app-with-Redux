@@ -19,7 +19,7 @@ const List = () => {
   return (
     <div className={classes.list}>
       {products.map((product) => 
-        (<Product key={products.id} {...product} cartItems={cartItems}/>))} {/* {...product} is the same as image = {product.image} name={product.name} price={product.price}  */}
+        (<Product key={product.id} {...product} cartItems={cartItems}/>))} {/* {...product} is the same as image = {product.image} name={product.name} price={product.price}  */}
     </div>
   );
 };
