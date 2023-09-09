@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap";
 import { useAppSelector } from "../app/hooks";
 import Product from "./Product";
+import classes from "./Cart.module.css";
 
 const Cart = () => {
 
@@ -9,10 +10,12 @@ const Cart = () => {
   return (
     <Container>
       <h1>Cart will be here</h1>
-      {cartItems.length === 0 && <p>Your cart is empty</p>}
-      {cartItems.map((item) => (
-        <Product {...item} />
-      ))}
+      <div className={classes.cartBox}>   
+        {cartItems.length === 0 && <p>Your cart is empty</p>}
+        {cartItems.map((item) => (
+          <Product {...item} />
+        ))}
+      </div>
     </Container>
   );
 };
