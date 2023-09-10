@@ -27,13 +27,8 @@ const Cart = () => {
       <h1>Cart will be here</h1>
       <div className={classes.cartBox}>   
         {cartIds.length === 0 && <p>Your cart is empty</p>}
-        { 
-        
-        cartProductsList.map((product) => {
-
-          return (
-            <Product key={product.id} {...product} />
-          )
+        {cartProductsList.map((product) => {
+          return <Product key={product.id} {...product} />
         })}
       </div>
     </Container>

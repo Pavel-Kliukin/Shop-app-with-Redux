@@ -2,6 +2,10 @@
   box-shadow: 5px 5px 10px;
 }
 
+.productCardImage {
+  padding: 1rem;
+}
+
 .cardFooter {
   display: flex;
   justify-content: flex-end;
