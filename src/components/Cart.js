@@ -24,7 +24,7 @@ const Cart = () => {
 
   return (
     <Container>
-      <h1>Cart will be here</h1>
+      <h1>Your Cart:</h1>
       <div className={classes.cartBox}>   
         {cartIds.length === 0 && <p>Your cart is empty</p>}
         {cartProductsList.map((product) => {

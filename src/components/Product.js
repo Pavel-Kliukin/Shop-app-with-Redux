@@ -29,19 +29,28 @@ const Product = (props) => {
 
   return (
     <Card className={classes.productCard} style={{ width: '22rem', margin: "1rem" }}>
-    <Card.Header><font color="grey">Price:</font> <b>{price}</b> €</Card.Header>
-    <Card.Img className={classes.productCardImage} variant="top" src={image} alt={title} />
-    <Card.Body>
+    <Card.Header className={classes.cardHeader}>
+      <div className={classes.price}>
+        <font color="grey">Price:</font> <b>{price}</b> €
+      </div>
+      <div className={classes.id}>
+        ID: {id}
+      </div>
+    </Card.Header>
+    <div className={classes.imageBox}>
+      <Card.Img className={classes.productCardImage} variant="top" src={image} alt={title} />
+    </div>
+    <div className={`${classes.category} text-muted`}>
+      {category}
+    </div>
+    <Card.Body className={classes.cardBody}>
       <Card.Title>{title}</Card.Title>
       <Card.Text>
         {description}
       </Card.Text>
     </Card.Body>
     <ListGroup className="list-group-flush">
-      <ListGroup.Item>{category}</ListGroup.Item>
       <ListGroup.Item>Rating: {rating.rate} <font color="grey">({rating.count} votes)</ font></ListGroup.Item>
-      <ListGroup.Item>ID: {id}</ListGroup.Item>
-      {/* <ListGroup.Item>Quantity: {quantity}</ListGroup.Item> */}
     </ListGroup>
     <Card.Footer className={classes.cardFooter}>
       <small className="text-muted">Add to Cart:</small>
