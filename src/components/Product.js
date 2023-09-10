@@ -22,13 +22,15 @@ const Product = (props) => {
 
   const handleAddProduct = () => {
 
+    if (product.quantity === 0) { // if quantity goes from 0 to 1 then we adds the product to the Cart
+      dispatch(addToCart(product.id)) //adds a product to a Cart via cartSlice.js
+    }
     dispatch(increaseQuantity({ id: product.id })); // adds 1 to a quantity of a product with given id via productsSlice.js
-    dispatch(addToCart(product)) //adds a product to a Cart via cartSlice.js
   }
   const handleRemoveProduct = () => {
     
     dispatch(decreaseQuantity({ id: product.id })); // reduces 1 from a quantity of a product with given id via productsSlice.js
-    dispatch(removeItemFromCart(product)) //adds a product to a Cart via cartSlice
+    // dispatch(removeItemFromCart(product.id)) //removes a product to a Cart via cartSlice
   }
 
   return (

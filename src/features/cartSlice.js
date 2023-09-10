@@ -7,16 +7,9 @@ export const cartSlice = createSlice ({
   initialState,
   reducers: {
     addToCart(state, action) {
-        if (state.length === 0) {
-          state.push({ ...action.payload })
-        } else {
-          const index = state.findIndex(
-            (product) => product.title === action.payload.title
-          )
-          if (index === -1) {
-            state.push({ ...action.payload })
-          }
-        }
+        if (!state.includes(action.payload)) {
+          state.push(action.payload)
+        } 
       },
     removeItemFromCart: (state, action) => {
         const index = state.findIndex(
