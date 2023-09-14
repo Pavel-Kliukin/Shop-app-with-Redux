@@ -23,6 +23,7 @@ export const productsSlice = createSlice ({
   // The 'reducers' field lets us define reducers and generate associated actions
   // This is where direct logic goes.
   reducers: {
+
     increaseQuantity(state, action) {
       const { id } = action.payload; // Assuming action.payload contains the product ID
       const productIndex = state.products.findIndex((product) => product.id === id);
@@ -31,12 +32,22 @@ export const productsSlice = createSlice ({
         state.products[productIndex].quantity += 1;
       }
     },
+
     decreaseQuantity(state, action) {
       const { id } = action.payload; // Assuming action.payload contains the product ID
       const productIndex = state.products.findIndex((product) => product.id === id);
 
       if (productIndex !== -1 && state.products[productIndex].quantity > 0) {
         state.products[productIndex].quantity -= 1;
+      }
+    },
+
+    QuantityToZero(state, action) {
+      const { id } = action.payload; // Assuming action.payload contains the product ID
+      const productIndex = state.products.findIndex((product) => product.id === id);
+
+      if (productIndex !== -1) {
+        state.products[productIndex].quantity = 0;
       }
     },
   },
@@ -57,4 +68,5 @@ export const productsSlice = createSlice ({
 
 export const { increaseQuantity } = productsSlice.actions
 export const { decreaseQuantity } = productsSlice.actions
+export const { QuantityToZero } = productsSlice.actions
 export default productsSlice.reducer

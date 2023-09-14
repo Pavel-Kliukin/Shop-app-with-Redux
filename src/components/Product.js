@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import { useAppDispatch} from "../app/hooks";
 import { addToCart, removeFromCart } from "../features/cartSlice"
-import { increaseQuantity, decreaseQuantity } from "../features/productsSlice"
+import { increaseQuantity, decreaseQuantity, QuantityToZero } from "../features/productsSlice"
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import classes from "./Product.module.css";
@@ -18,13 +18,18 @@ const Product = (props) => {
     }
     dispatch(increaseQuantity({ id: product.id })); // adds 1 to a quantity of a product with given id via productsSlice.js
   }
+
   const handleDecreaseQuantity = () => {
     
     if (product.quantity === 1) { // if quantity goes from 1 to 0 then we removes the product from the Cart
-      dispatch(removeFromCart(product.id)) //adds a product to a Cart via cartSlice.js
+      dispatch(removeFromCart(product.id)) //removes a product from a Cart via cartSlice
     }
     dispatch(decreaseQuantity({ id: product.id })); // reduces 1 from a quantity of a product with given id via productsSlice.js
-    // dispatch(removeFromCart(product.id)) //removes a product to a Cart via cartSlice
+  }
+
+  const handleDeleteFromCart = () => {
+    dispatch(QuantityToZero({ id: product.id }))
+    dispatch(removeFromCart(product.id)) //removes a product from a Cart via cartSlice
   }
 
   return (
@@ -53,6 +58,9 @@ const Product = (props) => {
       <ListGroup.Item>Rating: {rating.rate} <font color="grey">({rating.count} votes)</ font></ListGroup.Item>
     </ListGroup>
     <Card.Footer className={classes.cardFooter}>
+      <div className={classes.delButtonWrapper}>
+        {product.quantity > 0 && <Button variant="danger" className={classes.delButton} onClick={handleDeleteFromCart}><b>Delete</b></Button>}
+      </div>
       <small className="text-muted">Add to Cart:</small>
       <div className={classes.addRemoveBox}>
         <button className={`${classes.plusMinus} text-muted`} onClick={handleDecreaseQuantity}>-</button>
