@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = []
+const initialState = [] // The array will contain only products' ids
 
 export const cartSlice = createSlice ({
   name: "cart",
   initialState,
-  
+
   reducers: {
     addToCart(state, action) {
       const id = action.payload
